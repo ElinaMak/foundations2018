@@ -1,0 +1,1453 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Homework 5, Part 1: Building a pandas cheat sheet\n",
+    "\n",
+    "**Use `animals.csv` to answer the following questions.** The data is small and the questions are pretty simple, so hopefully you can use this for pandas reference in the future."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 0) Setup\n",
+    "\n",
+    "Import pandas **with the correct name** and set `matplotlib` to always display graphics in the notebook."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 1) Reading in a csv file\n",
+    "\n",
+    "Use pandas to read in the animals CSV file, saving it as a variable with the normal name for a dataframe"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "pandas.core.frame.DataFrame"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "type(pd.read_csv(\"animals.csv\"))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv(\"animals.csv\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 2) Checking your data\n",
+    "\n",
+    "Display the number of rows and columns in your data. Also display the names and data types of each column."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(7, 3)"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.shape"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "animal    object\n",
+       "name      object\n",
+       "length     int64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 3) Display the first 3 animals\n",
+    "\n",
+    "Hmmm, we know how to take the first 5, but maybe the first 3. Maybe there is an option to change how many you get? Use `?` to check the documentation on the command."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length\n",
+       "0    cat        Anne      35\n",
+       "1    cat         Bob      45\n",
+       "2    dog  Egglesburg      65"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.head(3)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 4) Sort the animals to show me the 3 longest animals\n",
+    "\n",
+    "> **TIP:** You can use `.head()` after you sort things!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length\n",
+       "2    dog  Egglesburg      65\n",
+       "3    dog       Devon      50\n",
+       "1    cat         Bob      45"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by=\"length\", ascending=False).head(3)  "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 5) Get the mean and standard deviation of animal lengths\n",
+    "\n",
+    "You can do this with separate commands or with a single command."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count     7.000000\n",
+       "mean     38.857143\n",
+       "std      17.101935\n",
+       "min      10.000000\n",
+       "25%      33.500000\n",
+       "50%      35.000000\n",
+       "75%      47.500000\n",
+       "max      65.000000\n",
+       "Name: length, dtype: float64"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['length'].describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 6) How many cats do we have and how many dogs?\n",
+    "\n",
+    "You only need one command to do this"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "count       7\n",
+       "unique      2\n",
+       "top       cat\n",
+       "freq        4\n",
+       "Name: animal, dtype: object"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# We do \"describe\" to get the answer from the 'count'\n",
+    "df.animal.describe() "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 7) Only display the dogs\n",
+    "\n",
+    "> **TIP:** It's probably easiest to make it display the list of `True`/`False` first, then wrap the `df[]` around it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "cat    4\n",
+       "dog    3\n",
+       "Name: animal, dtype: int64"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['animal'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 8) Only display the animals that are longer than 40cm"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Fontaine</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Charlie</td>\n",
+       "      <td>32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Xypher</td>\n",
+       "      <td>10</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length\n",
+       "2    dog  Egglesburg      65\n",
+       "3    dog       Devon      50\n",
+       "1    cat         Bob      45\n",
+       "0    cat        Anne      35\n",
+       "5    dog    Fontaine      35\n",
+       "4    cat     Charlie      32\n",
+       "6    cat      Xypher      10"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by=\"length\", ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 35,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length\n",
+       "1    cat         Bob      45\n",
+       "2    dog  Egglesburg      65\n",
+       "3    dog       Devon      50"
+      ]
+     },
+     "execution_count": 35,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[df.length >= 40]\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 9) `length` is the animal's length in centimeters. Create a new column called `inches` that is the length in inches."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "      <th>inches</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "      <td>13.779528</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "      <td>17.716535</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "      <td>25.590551</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "      <td>19.685039</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Charlie</td>\n",
+       "      <td>32</td>\n",
+       "      <td>12.598425</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length     inches\n",
+       "0    cat        Anne      35  13.779528\n",
+       "1    cat         Bob      45  17.716535\n",
+       "2    dog  Egglesburg      65  25.590551\n",
+       "3    dog       Devon      50  19.685039\n",
+       "4    cat     Charlie      32  12.598425"
+      ]
+     },
+     "execution_count": 39,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['inches'] = df.length / 2.54\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 10) Save the cats to a separate variable called `cats`. Save the dogs to a separate variable called `dogs`.\n",
+    "\n",
+    "This is the same as listing them, but you just save the result to a variable instead of looking at it. Be sure to use `.head()` to make sure your data looks right.\n",
+    "\n",
+    "Once you do this, every time you use `cats` you'll only be talking about the cats, and same for the dogs."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Charlie</td>\n",
+       "      <td>32</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Xypher</td>\n",
+       "      <td>10</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal     name  length\n",
+       "0    cat     Anne      35\n",
+       "1    cat      Bob      45\n",
+       "4    cat  Charlie      32\n",
+       "6    cat   Xypher      10"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cat_df = df[df.animal == 'cat']\n",
+    "cat_df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Fontaine</td>\n",
+       "      <td>35</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length\n",
+       "2    dog  Egglesburg      65\n",
+       "3    dog       Devon      50\n",
+       "5    dog    Fontaine      35"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dog_df = df[df.animal == 'dog']\n",
+    "dog_df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 11) Display all of the animals that are cats and above 12 inches long.\n",
+    "\n",
+    "First do it using the `cats` variable, then also do it using your `df` dataframe.\n",
+    "\n",
+    "> **TIP:** For multiple conditions, you use `df[(one condition) & (another condition)]`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 40,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "      <th>inches</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "      <td>13.779528</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "      <td>17.716535</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Charlie</td>\n",
+       "      <td>32</td>\n",
+       "      <td>12.598425</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal     name  length     inches\n",
+       "0    cat     Anne      35  13.779528\n",
+       "1    cat      Bob      45  17.716535\n",
+       "4    cat  Charlie      32  12.598425"
+      ]
+     },
+     "execution_count": 40,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[(df.animal == 'cat') & (df.length > 12)]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 12) What's the mean length of a cat? What's the mean length of a dog?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 41,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "length    30.5\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 41,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "cat_df.mean()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "length    50.0\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dog_df.mean()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 13) If you didn't already, use `groupby` to do #12 all at once"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>length</th>\n",
+       "      <th>inches</th>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>animal</th>\n",
+       "      <th></th>\n",
+       "      <th></th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>cat</th>\n",
+       "      <td>30.5</td>\n",
+       "      <td>12.007874</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>dog</th>\n",
+       "      <td>50.0</td>\n",
+       "      <td>19.685039</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        length     inches\n",
+       "animal                   \n",
+       "cat       30.5  12.007874\n",
+       "dog       50.0  19.685039"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.groupby('animal').mean()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 14) Make a histogram of the length of dogs.\n",
+    "\n",
+    "We didn't talk about how to make a histogram in class! It **does not** use `plot()`. Imagine you're a programmer who doesn't want to type out `histogram` - what do you think you'd type instead?\n",
+    "\n",
+    "> **TIP:** The method is four letters long\n",
+    ">\n",
+    "> **TIP:** First you'll say \"I want the length column,\" then you'll say \"make a histogram\"\n",
+    ">\n",
+    "> **TIP:** This is the worst histogram ever"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 47,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%matplotlib inline"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x10afacc18>"
+      ]
+     },
+     "execution_count": 60,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "dog_df.length.hist()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 15) Make a horizontal bar graph of the length of the animals, with the animal's name as the label\n",
+    "\n",
+    "> **TIP:** It isn't `df['length'].plot()`, because it needs *both* columns. Think about how we did the scatterplot in class.\n",
+    ">\n",
+    "> **TIP:** Which is the `x` axis and which is the `y` axis? You'll notice pandas is kind of weird and wrong.\n",
+    ">\n",
+    "> **TIP:** Make sure you specify the `kind` of graph or else it will be a weird line thing\n",
+    ">\n",
+    "> **TIP:** If you want, you can set a custom size for your plot by sending it something like `figsize=(15,2)`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 51,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x10ad220f0>"
+      ]
+     },
+     "execution_count": 51,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "df.groupby('animal').length.median().plot(kind='barh')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 16) Make a sorted horizontal bar graph of the cats, with the larger cats on top\n",
+    "\n",
+    "> **TIP:** Think in steps, even though it's all on one line - first make sure you can sort it, then try to graph it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 64,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x10b019278>"
+      ]
+     },
+     "execution_count": 64,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "cat_df.length.sort_values().plot(kind='barh')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x10b196438>"
+      ]
+     },
+     "execution_count": 66,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "cat_df.sort_values(by='length').plot(x='name', y='length', kind='barh')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 17) As a reward for getting down here: run the following code, then plot the number of dogs vs. the number of cats\n",
+    "\n",
+    "> **TIP:** Counting the number of dogs and number of cats does NOT use `.groupby`! That's only for calculations.\n",
+    ">\n",
+    "> **TIP:** You can set a title with `title=\"Number of animals\"`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "plt.style.use('fivethirtyeight')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>animal</th>\n",
+       "      <th>name</th>\n",
+       "      <th>length</th>\n",
+       "      <th>inches</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Anne</td>\n",
+       "      <td>35</td>\n",
+       "      <td>13.779528</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Bob</td>\n",
+       "      <td>45</td>\n",
+       "      <td>17.716535</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Egglesburg</td>\n",
+       "      <td>65</td>\n",
+       "      <td>25.590551</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Devon</td>\n",
+       "      <td>50</td>\n",
+       "      <td>19.685039</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Charlie</td>\n",
+       "      <td>32</td>\n",
+       "      <td>12.598425</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>dog</td>\n",
+       "      <td>Fontaine</td>\n",
+       "      <td>35</td>\n",
+       "      <td>13.779528</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>cat</td>\n",
+       "      <td>Xypher</td>\n",
+       "      <td>10</td>\n",
+       "      <td>3.937008</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  animal        name  length     inches\n",
+       "0    cat        Anne      35  13.779528\n",
+       "1    cat         Bob      45  17.716535\n",
+       "2    dog  Egglesburg      65  25.590551\n",
+       "3    dog       Devon      50  19.685039\n",
+       "4    cat     Charlie      32  12.598425\n",
+       "5    dog    Fontaine      35  13.779528\n",
+       "6    cat      Xypher      10   3.937008"
+      ]
+     },
+     "execution_count": 69,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 72,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x10b2b9588>"
+      ]
+     },
+     "execution_count": 72,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "iVBORw0KGgoAAAANSUhEUgAAAaMAAAEeCAYAAAAnwXpfAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDIuMi4yLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvhp/UCwAAGuZJREFUeJzt3Xl8zHcex/E3IoRgHHFF4oiwErotbaggzjhSoXWkpWW1rtBSbW2o+1ihlrZu6lip1E0JK9oQBBtRR22dQbfrqrNJmqCOZP/wSLbTBEGSb4zX858+Hr+Z+f0+v5l2XvP7zW/SPHFxcSkCAMCgvKYHAACAGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRrAJoaGhslgsCg4ONj1KloqMjFSrVq1UqVIlWSwW+fn5mR5JP/30kywWiwIDA02PYiU4OFgWi0VRUVGmR8FjsDM9AHIPi8UiSSpfvry+++47FSpUKN19mjdvru+++07ff/+9KlasmNMjPlN++uknvfHGG7K3t1dAQIBKlCghV1dX02MB2YIYIZ3z589r+vTpCgoKMj3KM2379u26efOmgoKCNGjQINPjpClfvrxiYmJUtGhR06PAhnCaDlaKFi2qUqVKadq0afr5559Nj/NMu3DhgiSpdOnShiexlj9/flWrVk1ly5Y1PQpsCDGClYIFC2ro0KFKSkrS+PHjM/WYh32HEBgYKIvFop9++indY/z8/HTp0iX1799f7u7uKl++vHx9fbV7925JUlJSkkaMGKGaNWuqdOnSqlu3rr7++usHzhMdHS1/f3+5uLjIxcVFHTt21MGDBzO8b3JyskJCQtSyZUu5urqqTJkyevnllzV16lTdunUr3f0tFotq1aql+Ph4DRkyRDVr1lTJkiU1a9ashz5PKSkpCgkJUfPmzVWhQgWVK1dODRs21PTp03X79u20+0VFRVl9/9W/f39ZLJZMfR8SHx+vadOmqW3btvLw8JCTk5Pc3NwUEBCgPXv2ZPiY1H3643P9wgsv6LPPPlNKivVfDLvf6536OkdFRWnVqlXy8fFRuXLl9Kc//Ukff/yxfvvtN0n3jvheeeUVubi4yNXVVb1799a1a9fSzbVjxw4NHDhQdevWlYuLi8qWLat69eppwoQJunHjxkOf71S7d+/W66+/Lk9PT5UuXVpVq1ZV48aNNWzYsHT7BnM4TYd0unfvrnnz5umrr75S3759VbNmzWzbVnx8vFq2bKnixYurU6dOOn/+vNatW6cOHTro22+/1cCBA5WYmKg2bdro119/1erVq9WjRw85OzvrpZdeSre+ffv26dNPP1WTJk3Uq1cvnTp1SmFhYdq1a5e+/vpr1a1bN+2+d+7c0Ztvvqnw8HBVrVpVHTp0UIECBbRr1y6NHTtW27dv1+rVq2VnZ/2fya1bt+Tv76/4+Hi1aNFCDg4OcnZ2fui+9u3bV8uXL1f58uXVpUsX5c+fX+Hh4RoxYoQiIyO1YsUK2dnZydXVVUFBQdq5c6d27dqlNm3aqFatWpL00O+MTpw4oXHjxql+/fry9fWVxWLR2bNntWnTJkVERGjp0qXy9fVN97g7d+6oQ4cOunDhgpo3by47Oztt3LhRo0eP1s2bNzVkyJCH7l+qefPmKTIyUm3atFH9+vUVHh6uWbNmKT4+Xr6+vurTp49atWqlbt26afv27VqxYoWuXbumVatWWa3n888/14kTJ1S3bl35+vrq5s2b2rNnjz755BNFRUUpLCws3WvzRxEREercubMcHR3VunVrOTs7Ky4uTqdOndLcuXM1ZsyYh64DOYNXAenY2dlp7NixCggI0PDhwx96JPIkfvjhB/Xu3VuTJk1Snjx5JElTpkzRuHHj9Morr6hhw4ZasGCB7O3tJUlNmzZVr1699Nlnnyk0NDTd+iIiIjR58mT16tUrbdm6devUvXt3vfvuu4qJiUnbzqeffqrw8HD16tVLEydOVL58+STdO1oaNGiQFi9erAULFqhPnz5W27h48aJq1KihTZs2ZXiRR0bWrFmj5cuXy9PTU5s2bUr7vmXUqFHq2LGjtm7dqtmzZ+u9995TxYoVNXToUAUHB2vXrl3y8/NT165dM7WdatWq6dixYypZsqTV8nPnzqlZs2YaNmxYhjG6cOGCatasqbVr18rBwUGSFBQUpDp16mjWrFn68MMPlT9//kzNEBUVpR07dqhKlSqSpCFDhqh27dpaunSpNm3apLCwsLQPErdu3ZKPj48iIiJ06NAhPffcc2nrmTJliipWrJj2eqUaP368/v73v6d9aHmQxYsXKzk5WRs2bLBatyRdu3aNEOUinKZDhlq2bKnGjRtr27Zt2rx5c7Ztp3Dhwho5cqTVG05AQIAkKS4uTuPHj08LkSS99tpryp8/v/79739nuL4qVaronXfesVrWrl07eXl5KTY2Nu1UVXJysubMmSMnJycFBwenhUiS8ubNqzFjxihPnjxavnx5htsZN25cpkMkSSEhIZLuxef3X/zb29trwoQJku69cT6pYsWKpQuRJDk7O8vf31+xsbE6c+ZMho+dNGlSWogkycnJSW3atFFCQoJiY2MzPUOfPn3SQpQ6U+vWrZWcnKyWLVtaHdHa29urffv2ku59MPm9SpUqpQuRdO+0pSRt3bo10zP9fr9SlShRItOPR/bjYwHua9y4cfLx8dHIkSPVvHlzqzfsrFKlShU5OjpaLUv9YrxYsWLpLh/Ply+fnJycdP78+QzX9/LLLytv3vSfsby9vRUTE6NDhw6pXr16OnnypK5evarKlStr8uTJGa7LwcFBJ06cSLe8YMGCj3zq8vvvv5ckNWzYMN1tNWvWlJOTk06ePKnExMR0z8ejio6O1pw5c7R3715dvnw53XdfFy5ckIuLi9WyokWLWgUkVYUKFSTd+2CQWX88ApH+/5pmdFu5cuUkKd1rmpSUpDlz5mjDhg06deqUfv31V6vveFIv8HiQTp06KSwsTM2aNdOrr76qhg0b6qWXXuJnCbkQMcJ91apVS126dNGSJUu0aNEi9ezZM8u3kdHlwamnTu536XC+fPl0586dDG+735VnTk5OkqSEhARJSvvC/Mcff9SkSZMeaeZSpUpl+In9QRISElS0aNEMP6FLUpkyZXT58mUlJCQ8UYzCwsLUvXt3FSxYUI0bN1blypVVqFAh5c2bN+07qNQLCX6vWLFiGa4v9QPI3bt3Mz1DRq9b6noedNvvL+K4ffu2/P39tW/fPnl4eOjVV19VqVKl0v7dmDRpUob78Uf+/v5asWKFZs6cqaVLl6YdfXp4eCgoKEjt2rXL9H4hexEjPNDw4cO1du1aTZw4UZ07d87wPqlHIvd7w4qPj8+2+f7o0qVLGS6/fPmypP+/Gab+s1WrVlq2bNkjbeNRQ5S6vV9++UU3btzIMEgXL160mutxTZgwQfb29oqMjFT16tWtbnv//fe1a9euJ1p/TvnnP/+pffv2qUuXLumuVPz5558f6QOEr6+vfH19dePGDe3fv18RERGaP3++/vKXvygsLEwNGjTI6vHxGPjOCA9UtmxZDRgwQFeuXNHUqVMzvE/qX244e/Zsutvu3LmjQ4cOZeuMvxcdHa3k5OR0y1PfhFNPE1WrVk3FihXT/v37M7yEO6v9+c9/liTt3Lkz3W1HjhzR5cuXVbVq1Sc+RXf69GlVr149XYiSk5MVHR39ROvOSadPn5YktW3bNt1tjxtUBwcHeXt7a9SoURo3bpxSUlK0cePGJ5oTWYcY4aHee+89lS9fXrNnz87wh7BFihRR9erVtWfPHh0+fDhteUpKiiZOnJhhpLLLqVOntGDBAqtl69atU0xMjNzd3dMu7bazs1Pfvn116dIlffTRR7p+/Xq6dV29ejXLQvrWW29JksaOHavExMS05bdv39awYcMkSd26dXvi7bi6uur06dNW36ekpKQoODhYx44de+L155TUS9j/GO///Oc/GjVqVKbXs3PnzgxP6aYeiT7KRSjIXpymw0MVKlRIw4cPV79+/e4bloEDB6pfv35q3bq12rdvr0KFCmnPnj06d+6cGjRokOERQXZIvXw5IiJCnp6eab8zcnBw0PTp061OsQ0ePFhHjhxRSEiIvvnmGzVq1EjOzs66cuWKfvzxR0VHR6tnz54Zfun+qDp06KDw8HCtXLlS9erVk5+fX9rvjE6ePCkfHx/169fvibfTr18/DRo0SI0aNZK/v7/s7Oy0Z88eHT9+XK1atVJ4ePgTbyMntGrVSlWqVNHMmTN15MgRPffcczp79qw2b94sX1/fTH/AGTJkiM6dO6d69erJ1dVVBQsW1OHDh7VlyxaVKFFC3bt3z+Y9QWZxZIRMef311x/4ppx6br9ChQpatmyZVqxYITc3N23dujXdlVvZ6cUXX9T69et1/fp1zZs3T1u2bFGTJk20adMm1atXz+q+dnZ2CgkJ0fz581WjRg19++23mjFjhr755hvdvHlTH3zwgdXvlZ7U3Llz9emnn6p06dL68ssvNX/+fBUoUEBjx47VypUrs+Q3Lz169NDMmTNVpkwZLV26VCtXrpSzs7MiIiLSThU+DQoXLqz169erU6dOOnbsmObOnavDhw9r8ODBmjdvXqbX8+GHH6pZs2Y6ceKEQkNDtWDBAv33v/9VYGCgduzYwR+ezUXyxMXF8fcwAABGcWQEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44jRM+pR/v80eHw8z9mP5zhnZPfzTIwAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhHjAAAxhEjAIBxxAgAYBwxAgAYR4wAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhHjAAAxhEjAIBxxAgAYBwxAgAYR4wAAMYRIwCAcXamB3gQx+6NTY9gs14wPcAzguc5Bwz/wvQEyAIcGQEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAuMeOUUBAgAIDA7NyFgDAM4ojIwCAccQIAGBcpmJ0/fp1BQYGytnZWe7u7poyZYrV7XFxcerbt68qVqyosmXLql27djp69KjVfb788kvVrFlT5cqVU0BAgObPny+LxZJ1ewIAeGplKkYjRozQtm3bFBISonXr1unQoUPavXt32u2BgYHat2+fvvrqK23ZskUODg7q2LGjbty4IUmKiYnRgAED1LNnT0VFRalNmzYKDg7Onj0CADx18sTFxaU86A6JiYmqUqWKZsyYoc6dO6ct8/DwkJ+fnz766CPVqVNHGzdulLe3tyQpPj5etWrV0vjx49WtWze98847iouL0+rVq9PWO3DgQC1evFhxcXH33bZj98ZZsIsAbNmB4V+YHgGZ5O7uft/b7B724B9//FG3bt2Sl5dX2jJHR0d5enpKko4fP668efNa3V6sWDF5eHjo2LFjkqQTJ06oVatWVuutU6eOFi9e/Gh7AgAZeNCbHLJGbGxstj7P2XoBQ548ebJz9QAAG/HQGFWuXFn58+fX3r1705YlJSXpyJEjkqTq1asrOTlZMTExabcnJCToyJEjql69uiSpWrVqOnDggNV69+/fnyU7AAB4+j00Ro6Ojnrrrbc0evRoRUZG6ujRo3r33XeVnJwsSXJzc1ObNm00aNAg7d69W4cPH1bv3r1VpEgRderUSZLUp08fbd26VdOmTdOpU6cUEhKiDRs2ZO+eAQCeGpk6TTdu3Dg1aNBAb775ptq2basaNWqofv36abfPmjVLtWvX1htvvKFmzZrpxo0bWrVqlRwcHCRJXl5e+vzzzzV37lx5e3tr48aNGjhwoAoWLJg9ewUAeKo89Gq67DJ06FBt377d6hLxP+JqOgAPc2D4F1zAkAOy+wKGh15Nl1WmTZumxo0by9HRUdu2bdOiRYs0YsSInNo8ACAXy7EYHThwQNOnT1dCQoIqVqyokSNH8odWAQCScjBGixYtyqlNAQCeMvyhVACAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhHjAAAxhEjAIBxxAgAYBwxAgAYR4wAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhnZ3qAB0lcvM30CDYrNjZW7u7upseweTzPOSA21vQEyAIcGQEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOPyxMXFpZge4n4si86ZHgEAIGlvg+tyd3fPtvVzZAQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMC4HI9RcHCwXn755ZzeLAAgF+PICABg3GPFKCUlRdOnT1ft2rVVunRpeXh4aMyYMZKk0aNH68UXX1TZsmVVq1YtjRw5Ujdv3pQkhYaGatKkSTp69KgsFossFotCQ0Ozbm8AAE8lu8d50NixY7VgwQL97W9/k7e3t65cuaJDhw5JkgoVKqQZM2aoXLlyOn78uD744APZ29tr+PDheu2113T06FFt3rxZGzZskCQVLVo06/YGAPBUyhMXF5fyKA9ITEyUm5ubgoOD9fbbbz/0/gsXLtT06dN14MABSfe+M1q/fr3+9a9/PfSxlkXnHmU0AEA22dvg+hOvw93d/b63PfKR0fHjx/Xbb7/Jx8cnw9vXrVun2bNn6/Tp00pKStLdu3d19+7dR90MACCXeVBMnlSWXsCwd+9evf3222ratKmWLVumHTt2aNiwYbp9+3ZWbgYAYGMe+cioWrVqKlCggLZv3y43Nzer26Kjo1WuXDn99a9/TVt25swZq/vY29tzpAQAsPLIMSpSpIj69u2rMWPGyN7eXt7e3rp27ZoOHjyoqlWr6sKFC1qxYoW8vLy0ZcsWrV692urxrq6uOnPmjA4ePCgXFxc5OjqqQIECWbZDAICnz2Odphs1apTef/99TZ48WV5eXurWrZvOnz+v1q1ba8CAARo6dKi8vb0VGRmpjz/+2Oqx/v7+atGihdq1ayc3NzetWrUqS3YEAPD0euSr6XISV9MBQO6wt8H1p+cCBgAAHgcxAgAYR4wAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhHjAAAxhEjAIBxxAgAYBwxAgAYR4wAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABgHDECABhnZ3qAB4nr4Wx6BJsVGxsrd3d302PYPJ7n7MdznDNiY2Ozdf0cGQEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwDhiBAAwjhgBAIwjRgAA44gRAMA4YgQAMI4YAQCMI0YAAOOIEQDAOGIEADCOGAEAjCNGAADjiBEAwLg8cXFxKaaHAAA82zgyAgAYR4wAAMYRIwCAccQIAGAcMQIAGJerYjR//nw999xzKlOmjHx8fLR7927TI9mcXbt26fXXX1eNGjVksVgUGhpqeiSbMnXqVDVp0kQuLi5yc3NTQECAjhw5Ynosm/PFF1+ofv36cnFxkYuLi1q0aKHNmzebHsumTZ06VRaLRYMHD86W9eeaGK1Zs0ZDhgzRhx9+qB07dsjLy0udOnXSmTNnTI9mU5KSkuTh4aGJEyfKwcHB9Dg2Z+fOnXrnnXe0efNmrV+/XnZ2dmrfvr1++eUX06PZlPLly2vMmDHavn27IiMj1ahRI3Xt2lU//PCD6dFs0t69e/WPf/xDnp6e2baNXPM7o2bNmsnT01PTpk1LW1a7dm21a9dOo0aNMjiZ7XJ2dtYnn3yirl27mh7FZiUmJsrV1VWhoaFq3bq16XFsWqVKlTRq1Cj16NHD9Cg2JT4+Xj4+Ppo2bZomTZokDw8PTZ48Ocu3kyuOjG7duqWDBw+qadOmVsubNm2qPXv2GJoKeHKJiYlKTk6WxWIxPYrNunv3rlavXq2kpCR5eXmZHsfmvP/++2rXrp0aNWqUrduxy9a1Z9LVq1d19+5dOTk5WS13cnLSpUuXDE0FPLkhQ4aoVq1avElmg8OHD8vX11c3b95U4cKFtWTJkmw9jfQsWrx4sU6fPq158+Zl+7ZyRYwAW/Txxx8rOjpa4eHhypcvn+lxbI67u7uioqKUkJCgdevWKTAwUBs2bJCHh4fp0WxCbGysxo4dq/DwcOXPnz/bt5crYlSyZEnly5dPly9ftlp++fJllS5d2tBUwOMbOnSo1qxZo7CwMFWqVMn0ODbJ3t5eVapUkSQ9//zz2r9/v2bNmqUZM2YYnsw2xMTE6OrVq6pXr17asrt372r37t1auHChzp8/rwIFCmTZ9nJFjOzt7fX8888rMjJS7du3T1seGRkpf39/g5MBjy4oKEhr165VWFiYqlWrZnqcZ0ZycrJu3bplegyb4efnpxdeeMFqWf/+/eXm5qYPPvhA9vb2Wbq9XBEj6d5O9unTR3Xq1FHdunW1cOFC/fzzz1wZk8USExN1+vRpSff+4z179qwOHTqk4sWLy8XFxfB0T7+PPvpIy5cv15IlS2SxWHTx4kVJUuHCheXo6Gh4OtsxevRo+fr6ytnZWYmJiVq1apV27typFStWmB7NZlgslnQX3hQqVEjFixfPllOhuebSbunej14///xzXbx4UTVq1NCECRPk7e1teiybEhUVpbZt26Zb/sYbb2j27NkGJrIt97tqLigoSEOHDs3haWxXYGCgoqKidOnSJRUtWlSenp4aMGCAmjVrZno0m+bn55dtl3bnqhgBAJ5NueJ3RgCAZxsxAgAYR4wAAMYRIwCAccQIAGAcMQIAGEeMAADGESMAgHHECABg3P8AQkGNgZejdtIAAAAASUVORK5CYII=\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "df['animal'].value_counts().plot(kind='barh', title=\"Number of animals\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
