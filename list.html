@@ -1,0 +1,6 @@
+<p>This is a list of religions</p>
+<ul>
+  {% for religion in religions %}
+    <li><a href="{{ url_for('show', Religion_in_which_raised=religion.Religion_in_which_raised) }}">{{ religion.religion_name }}</li>a</li>
+  {% endfor %}
+</ul>
